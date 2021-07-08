@@ -5,6 +5,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import GuestList from '../GuestList/GuestList';
 import DinnerSupplies from '../DinnerSupplies/DinnerSupplies';
+import GuestForm from '../GuestForm/GuestForm';
 
 
 function App() {
@@ -27,8 +28,6 @@ function App() {
         console.log(err);
       })
   }
-
-
   const addGuest = () => {
     axios.post('/guests', { name: newGuestName, kidsMeal: newGuestMeal })
       .then(response => {
@@ -45,64 +44,27 @@ function App() {
   };
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (addNewGuest) => {
     if (newGuestName) {
       addGuest();
     }
     else {
-      alert('The new guest needs a name!');
+     alert('The new guest needs a name!');
     }
-  }
-
+}
   console.log(newGuestMeal)
   return (
     <div className="App">
       <Header title='Prim Proper Props'/>
       <h2>Party Leader</h2>
       {guestList[0] && <h3>{guestList[0].name}</h3>}
-      <h2>Add a new guest</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name
-        </label>
-        <input
-          type="text"
-          placeholder="Name"
-          value={newGuestName}
-          onChange={(evt) => setNewGuestName(evt.target.value)}
-        />
-        <div>
-          Would this guest like a kid's meal?
-          <div >
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  value={true}
-                  checked={newGuestMeal === 'true'}
-                  name="kidsMeal"
-                  onChange={(evt) => setNewGuestMeal(evt.target.value)}
-                />
-                Yes, this guest would like a Kid's Meal
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  value={false}
-                  checked={newGuestMeal === 'false'}
-                  name="kidsMeal"
-                  onChange={(evt) => setNewGuestMeal(evt.target.value)}
-                />
-                No, this guest would not like a Kid's Meal
-              </label>
-            </div>
-          </div>
-        </div>
-        <button type="submit">Add Guest</button>
-      </form>
+      <GuestForm 
+        newGuestName= {newGuestName}
+        setNewGuestName= {setNewGuestName}
+        newGuestMeal= {newGuestMeal}
+        setNewGuestMeal= {setNewGuestMeal}
+        addNewGuest= {handleSubmit}
+      />
       <GuestList list={guestList}/>
       <DinnerSupplies list= {guestList} />
       <Footer />
