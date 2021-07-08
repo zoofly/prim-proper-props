@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 function App() {
   let [guestList, setGuestList] = useState([]);
   let [newGuestName, setNewGuestName] = useState('');
@@ -53,9 +54,7 @@ function App() {
   console.log(newGuestMeal)
   return (
     <div className="App">
-      <header>
-        <h1>Prim Proper Props</h1>
-      </header>
+      <Header title='Prim Proper Props'/>
       <h2>Party Leader</h2>
       {guestList[0] && <h3>{guestList[0].name}</h3>}
       <h2>Add a new guest</h2>
@@ -127,10 +126,7 @@ function App() {
       <div>
         Knives: {guestList.length * 2}
       </div>
-      <footer>
-        <h3>Have fun!</h3>
-        <p>Don't forget to mind your Ps and Qs!</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
