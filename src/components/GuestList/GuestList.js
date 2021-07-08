@@ -1,5 +1,3 @@
-import '../App/App';
-
 function GuestList(props){
     return (
         <>
